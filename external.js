@@ -7,10 +7,44 @@ function getComputerChoice() {
 
 
 // Get player choice
-// Use prompts and make choice case-insensitive
 function getPlayerChoice() {
-    const choice = prompt("Choose your weapon:", "");
-    return choice.toLowerCase();
+    // Use prompts to get prompt; make choice case-insensitive
+    const choice = prompt(`Choose your weapon: "Rock" | "Paper" | "Scissors"`, "");
+
+    //Create guards against edge cases
+    //When user cancels prompts
+    //Ask user whether to wish to remake a choice or lose round or forfeit game.
+    if (choice === null) {
+        let chooseAgain = confirm("You didn't make a choice. Would you like to choose again?")
+        if (chooseAgain) {
+            return getPlayerChoice();
+        } else {
+            alert("You just forfeit this round")
+            return "forfeit";
+        }
+        //when user leaves prompt empty or enter space character(s) only
+        // ask whether to choose again or forfeit round.
+    } else if (choice.trim() === "") {
+        let chooseAgain = confirm("You entered an empty choice. Would you like to choose again?");
+        if (chooseAgain) {
+            return getPlayerChoice();
+        } else {
+            alert("You just forfeit this round")
+            return "forfeit"
+        }
+        // If user uses wrong word
+        // Create a way to show user valid options
+        // Prompt user about remaking a valid choice
+    } else if (choice.toLowerCase() !== "rock" || choice.toLowerCase() !== "paper" || choice.toLowerCase() !== "scissors") {
+        let chooseAgain = confirm(`${choice} is invalid. Would you like to choose again?`);
+        if (chooseAgain) {
+            return getPlayerChoice();
+        } else {
+            alert("You just forfeit this round");
+            return "forfeit";
+        }
+    }
+    return choice;
 }
 
 // Use player's and computer choices to play round
