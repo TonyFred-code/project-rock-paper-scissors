@@ -74,6 +74,8 @@ function playRound(playerChoice, computerChoice) {
         } else {
             return `It's a Tie!`;
         }
+    } else if (playerChoice === "forfeit") {
+        return "You Lose! Forfeiting gives computer the win"
     }
 }
 
@@ -81,10 +83,19 @@ function playRound(playerChoice, computerChoice) {
 // Inform user of winner of game after every 5 rounds
 function game() {
     let gameRounds = 5;
+    let computerScore = 0;
+    let playerScore = 0;
     while (gameRounds > 0) {
         const playerChoice = getPlayerChoice();
         const computerChoice = getComputerChoice();
-        console.log(playRound(playerChoice, computerChoice));
+        let result = (playRound(playerChoice, computerChoice));
+        if (result.includes("You Win!")) {
+            playerScore++;
+        } else if (result.includes("You Lose!")) {
+            computerScore++;
+        }
+        console.log(result);
+        console.log(`Player Score: ${playerScore} || Computer Score: ${computerScore}`)
         gameRounds--;
     }
 }
