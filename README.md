@@ -31,3 +31,5 @@ Project: Rock Paper Scissors (TOP)
     - Make game run through 5 rounds to determine winner
     - Inform user of winner of game after every 5 rounds
     - Give option to restart playing game
+
+- Game plays with 5 rounds no UI. Details in console.
