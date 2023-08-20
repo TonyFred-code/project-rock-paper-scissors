@@ -77,9 +77,17 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-const playerChoice = getPlayerChoice();
-const computerChoice = getComputerChoice();
-console.log(playRound(playerChoice, computerChoice));
 // Make game run through 5 rounds to determine winner
 // Inform user of winner of game after every 5 rounds
+function game() {
+    let gameRounds = 5;
+    while (gameRounds > 0) {
+        const playerChoice = getPlayerChoice();
+        const computerChoice = getComputerChoice();
+        console.log(playRound(playerChoice, computerChoice));
+        gameRounds--;
+    }
+}
+game();
+
 // Give option to restart playing game
