@@ -81,24 +81,5 @@ function playRound(playerChoice, computerChoice) {
 
 // Make game run through 5 rounds to determine winner
 // Inform user of winner of game after every 5 rounds
-function game() {
-    let gameRounds = 5;
-    let computerScore = 0;
-    let playerScore = 0;
-    while (gameRounds > 0) {
-        const playerChoice = getPlayerChoice();
-        const computerChoice = getComputerChoice();
-        let result = (playRound(playerChoice, computerChoice));
-        if (result.includes("You Win!")) {
-            playerScore++;
-        } else if (result.includes("You Lose!")) {
-            computerScore++;
-        }
-        console.log(result);
-        console.log(`Player Score: ${playerScore} || Computer Score: ${computerScore}`)
-        gameRounds--;
-    }
-}
-game();
 
 // Give option to restart playing game
