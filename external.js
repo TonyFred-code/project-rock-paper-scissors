@@ -4,6 +4,10 @@ const quitGameBtn = document.querySelector(".quit-game");
 const quitRoundBtn = document.querySelector(".quit-round");
 const nextRoundBtn = document.querySelector(".next-round");
 const choiceHeader = document.querySelector(".choice-header");
+const finalSummary = document.querySelector(".finalSummary");
+const playerChoiceText = document.querySelector(".player-choice");
+const computerChoiceText = document.querySelector(".computer-choice");
+const gameSummaryText = document.querySelector(".game-summary")
 
 choices.forEach((choice) => {
     choice.addEventListener("click", startRound);
