@@ -23,6 +23,13 @@ body {
     flex-direction: column;
     padding: 12px;
     height: 100%;
+    gap: 16px;
+}
+
+.game-name {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
 }
 
 .score-board-container {
@@ -30,13 +37,22 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    border: 3px solid white;
-    border-radius: 8px;
     padding: 16px;
 }
 
-.player-score {
-    text-align: center;
+.score-board-container > div {
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.score {
+    font-weight: bolder;
+    font-size: 18px;
 }
 
 .player-choices {
@@ -63,15 +79,48 @@ body {
     cursor: pointer;
 }
 
+.chosen {
+    transform: scale(1.2);
+}
+
+.round-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 6px;
+}
+
+.game-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
 .playing-buttons {
     display: flex;
-    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    gap: 8px;
 }
-.playing-buttons button {
-    flex: 0 1;
-    width: 90px;
 
+.playing-buttons button {
+    padding: 6px;
+    outline: none;
+    border: 3px solid white;
+    background-color: inherit;
+    color: white;
+    border-radius: 6px;
+    user-select: none;
 }
+
+.playing-buttons button:active {
+    background-color: rgb(199, 150, 150);
+    border-color: rgb(199, 150, 150);
+}
+
 .hidden {
     display: none;
 }

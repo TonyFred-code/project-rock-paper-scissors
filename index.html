@@ -9,60 +9,57 @@
   </head>
   <body>
     <div class="game-container">
+      <h1 class="game-name">ROCK PAPER SCISSORS</h1>
       <div class="score-board-container">
         <div class="player-score">
-            <span class="name">PLAYER</span>: <span class="score">0</span>
+          <span class="name">PLAYER: </span><span class="score">5</span>
         </div>
+        VS
         <div class="computer-score">
-            COMPUTER: <span class="score">0</span>
-        </div>
+          <span>COMPUTER: </span>
+          <span class="score">5</span></div>
       </div>
 
       <div class="player-choices">
         <h3>CHOOSE YOUR WEAPON</h3>
 
         <div class="choices">
-            <button class="rock choice">
-              <img
-                src="images/icon-rock.svg"
-                alt="Fist Signal to represent Rock Choice"
-              />
-            </button>
+          <button data-choice="rock" class="chosen choice">
+            <img
+              src="images/icon-rock.svg"
+              alt="Fist Signal to represent Rock Choice"
+            />
+          </button>
 
-            <button class="paper choice">
-              <img
-                src="images/icon-paper.svg"
-                alt="Hand Spread to signify Paper Choice"
-              />
-            </button>
+          <button data-choice="paper" disabled class="choice">
+            <img
+              src="images/icon-paper.svg"
+              alt="Hand Spread to signify Paper Choice"
+            />
+          </button>
 
-            <button class="scissors choice">
-              <img
-                src="images/icon-scissors.svg"
-                alt="Peace signal to signify Scissors Choice"
-              />
-            </button>
-          </div>
+          <button data-choice="scissors" disabled class="choice">
+            <img
+              src="images/icon-scissors.svg"
+              alt="Peace signal to signify Scissors Choice"
+            />
+          </button>
         </div>
+      </div>
 
-        <div class="round-summary hidden">
-            <div class="computer-summary">
-                COMPUTER CHOSE ROCK
-            </div>
-            <div class="player-summary">
-                YOU CHOSE PAPER
-            </div>
-            <div class="final-summary">
-                YOU LOSE! ROCK BEATS PAPER
-            </div>
-        </div>
+      <div class="round-summary">
+        <div class="computer-choice hidden">COMPUTER CHOSE ROCK</div>
+        <div class="player-choice hidden">YOU CHOSE PAPER</div>
+        <div class="final-summary hidden">YOU LOSE! ROCK BEATS PAPER</div>
+      </div>
+      <div class="game-summary hidden">YOU LOST THIS GAME.</div>
 
-        <div class="playing-buttons">
-            <button class="next-round hidden">NEXT ROUND</button>
-            <button class="quit-round hidden">QUIT ROUND</button>
-            <button class="quit-game hidden">QUIT SESSION</button>
-            <button class="new-game">NEW SESSION</button>
-        </div>
+      <div class="playing-buttons">
+        <button class="next-round hidden">NEXT ROUND</button>
+        <button class="quit-round">QUIT ROUND</button>
+        <button class="quit-game">QUIT SESSION</button>
+        <button class="new-game hidden">NEW SESSION</button>
+      </div>
     </div>
   </body>
 </html>
