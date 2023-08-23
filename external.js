@@ -1,7 +1,6 @@
 const choices = document.querySelectorAll(".choice");
 const startGameBtn = document.querySelector(".new-game");
 const quitGameBtn = document.querySelector(".quit-game");
-const quitRoundBtn = document.querySelector(".quit-round");
 const nextRoundBtn = document.querySelector(".next-round");
 const choiceHeader = document.querySelector(".choice-header");
 const decisionSummary = document.querySelector(".decision-summary");
@@ -18,7 +17,6 @@ choices.forEach((choice) => {
 startGameBtn.addEventListener("click", startGame);
 nextRoundBtn.addEventListener("click", startNextRound);
 quitGameBtn.addEventListener("click", resetGame);
-// quitRoundBtn.addEventListener("click", endRound);
 
 const gameState = {
   gameStarted: false,
@@ -85,12 +83,9 @@ function displayGameWinner() {
     addContentToElement("YOU LOSE THIS GAME!", gameSummaryText);
   }
 
-  // setTimeout(() => {
-  //   hideElements(playerChoiceText, computerChoiceText, decisionSummary);
-  // }, 400);
   addContentToElement("START NEW GAME", startGameBtn);
   showElements(gameSummaryText, startGameBtn);
-  hideElements(quitGameBtn, quitRoundBtn, nextRoundBtn);
+  hideElements(quitGameBtn, nextRoundBtn);
 }
 
 function endGame() {
@@ -102,11 +97,6 @@ function displayScore() {
   addContentToElement(gameState.playerScore, playerScoreContainer);
   addContentToElement(gameState.computerScore, computerScoreContainer);
 }
-
-// function quitGame() {
-//   resetGame();
-
-// }
 
 function startNextRound() {
   hideElements(
@@ -236,7 +226,7 @@ function playRound() {
   displayRoundSummary(decisionSummary);
   gameState.gameRound++;
   addContentToElement(`ROUND ${gameState.gameRound} RESULTS`, choiceHeader);
-  setTimeout(endRound, 150);
+  setTimeout(endRound, 500);
 }
 
 function resetGame() {
@@ -252,7 +242,7 @@ function resetGame() {
   gameState.gameStarted = false;
   gameState.gameEnded = false;
   gameState.gameRound = 0;
-  hideElements(quitGameBtn, quitRoundBtn,nextRoundBtn, computerChoiceText, playerChoiceText, gameSummaryText, decisionSummary);
+  hideElements(quitGameBtn, nextRoundBtn, computerChoiceText, playerChoiceText, gameSummaryText, decisionSummary);
   showElements(startGameBtn);
   addContentToElement("WANNA PLAY?", choiceHeader);
   updateScore();
@@ -286,7 +276,7 @@ function startGame() {
     choiceHeader
   );
   hideElements(startGameBtn);
-  showElements(quitRoundBtn, quitGameBtn);
+  showElements(quitGameBtn);
   gameState.allowedToStartNextRound = true;
   console.log(gameState);
 }
