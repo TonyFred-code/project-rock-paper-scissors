@@ -8,21 +8,29 @@ const decisionSummary = document.querySelector(".decision-summary");
 const playerChoiceText = document.querySelector(".player-choice");
 const computerChoiceText = document.querySelector(".computer-choice");
 const gameSummaryText = document.querySelector(".game-summary");
+const playerScoreContainer = document.querySelector(".player-score .score");
+const computerScoreContainer = document.querySelector(".computer-score .score");
 
 choices.forEach((choice) => {
   choice.addEventListener("click", startRound);
 });
 
 startGameBtn.addEventListener("click", startGame);
+nextRoundBtn.addEventListener("click", startNextRound);
 
 const gameState = {
   gameStarted: false,
+  gameEnded: false,
+  roundStarted: false,
+  allowedToStartNextRound: false,
+  roundEnded: false,
   playerChoice: null,
   computerChoice: null,
   playerScore: 0,
   computerScore: 0,
   gameRound: 0,
   roundWinner: null,
+  gameWinner: null,
 };
 
 // Get computer choice
@@ -47,19 +55,60 @@ function hideElements(...elements) {
 }
 
 function updateScore() {
+  if (gameState.playerScore === 5) {
+    gameState.gameWinner = "player";
+    displayGameWinner();
+    endRound();
+    endGame();
+    return;
+  } else if (gameState.computerScore === 5) {
+    gameState.gameWinner = "computer";
+    displayGameWinner();
+    endRound();
+    endGame();
+    return;
+  }
 
-    if (gameState.playerScore === 5 || gameState.computerScore === 5) {
-        console.log(gameState);
-        return;
-    }
+  if (gameState.roundWinner === "player") {
+    gameState.playerScore++;
+  } else if (gameState.roundWinner === "computer") {
+    gameState.computerScore++;
+  } else {
+    return;
+  }
+}
 
-    if (gameState.roundWinner === "player") {
-        gameState.playerScore++
-    } else if (gameState.roundWinner === "computer") {
-        gameState.computerScore++;
-    } else {
-        return;
-    }
+function displayGameWinner() {
+  if (gameState.gameWinner === "player") {
+  addContentToElement("YOU WIN THIS GAME!", gameSummaryText);
+  } else if (gameState.gameWinner === "computer") {
+    addContentToElement("YOU LOSE THIS GAME!", gameSummaryText);
+  }
+}
+
+function endGame() {
+  gameState.gameEnded = true;
+  gameState.gameStarted = false;
+}
+
+function displayScore() {
+  addContentToElement(gameState.playerScore, playerScoreContainer);
+  addContentToElement(gameState.computerScore, computerScoreContainer);
+}
+
+function startNextRound() {
+  hideElements(
+    computerChoiceText,
+    playerChoiceText,
+    gameSummaryText,
+    decisionSummary,
+    nextRoundBtn
+  );
+  addContentToElement(
+    `CHOOSE YOUR WEAPON FOR ROUND ${gameState.gameRound + 1}`,
+    choiceHeader
+  );
+  gameState.allowedToStartNextRound = true;
 }
 
 function showElements(...elements) {
@@ -81,38 +130,51 @@ function addContentToElement(content = "Empty", element = null) {
 }
 
 function displayChoice(chooser, choice, element) {
-    if (chooser === "player") {
-        addContentToElement(`YOU CHOSE ${choice.toUpperCase()}`, element);
-    } else {
-        addContentToElement(`COMPUTER CHOSE ${choice.toUpperCase()}`,element);
-    }
-    showElements(element);
+  if (chooser === "player") {
+    addContentToElement(`YOU CHOSE ${choice.toUpperCase()}`, element);
+  } else {
+    addContentToElement(`COMPUTER CHOSE ${choice.toUpperCase()}`, element);
+  }
+  showElements(element);
 }
 
 function displayRoundSummary(element) {
-    let roundWinner = gameState.roundWinner;
-    if (roundWinner === "player") {
-        addContentToElement(`YOU WIN!`, element)
-    } else if (roundWinner === "computer") {
-        addContentToElement(`YOU LOSE!`, element)
-    } else {
-        addContentToElement("IT'S A TIE!", element);
-    }
+  let roundWinner = gameState.roundWinner;
+  if (roundWinner === "player") {
+    addContentToElement(`YOU WIN!`, element);
+  } else if (roundWinner === "computer") {
+    addContentToElement(`YOU LOSE!`, element);
+  } else {
+    addContentToElement("IT'S A TIE!", element);
+  }
 
-    showElements(element);
+  showElements(element);
 }
 
 function startRound() {
   if (!gameState.gameStarted) {
-    startGame();
+    addContentToElement("CLICK START BUTTON TO START GAME", choiceHeader);
+    return;
+  }
+
+  if (!gameState.allowedToStartNextRound) {
+    addContentToElement(
+      "CLICK NEXT ROUND BUTTON TO START NEXT ROUND",
+      choiceHeader
+    );
+    return;
   }
 
   if (gameState.playerChoice) {
     return;
   }
+
   const buttonClicked = this;
   gameState.playerChoice = getPlayerChoice(buttonClicked);
   gameState.computerChoice = getComputerChoice();
+  gameState.roundStarted = true;
+  gameState.roundEnded = false;
+  gameState.allowedToStartNextRound = false;
   playRound();
 }
 
@@ -156,25 +218,27 @@ function decideRoundWinner(playerChoice, computerChoice) {
 }
 
 function playRound() {
-    displayChoice("player", gameState.playerChoice, playerChoiceText)
-    displayChoice("computer",gameState.computerChoice, computerChoiceText);
-    decideRoundWinner(gameState.playerChoice, gameState.computerChoice);
-    displayRoundSummary(decisionSummary);
-    gameState.gameRound++;
-    updateScore();
-    setTimeout(endRound, 2000)
+  displayChoice("player", gameState.playerChoice, playerChoiceText);
+  displayChoice("computer", gameState.computerChoice, computerChoiceText);
+  decideRoundWinner(gameState.playerChoice, gameState.computerChoice);
+  displayRoundSummary(decisionSummary);
+  gameState.gameRound++;
+  addContentToElement(`ROUND ${gameState.gameRound} RESULTS`, choiceHeader);
+  updateScore();
+  displayScore();
+  setTimeout(endRound, 2000);
 }
 
 function quitGame() {}
 
 function endRound() {
-    gameState.playerChoice = null;
-    gameState.computerChoice = null;
-    gameState.roundWinner = null;
-    showElements(nextRoundBtn);
-    hideElements(computerChoiceText, playerChoiceText, gameSummaryText, decisionSummary)
-    console.log(gameState);
-
+  gameState.playerChoice = null;
+  gameState.computerChoice = null;
+  gameState.roundWinner = null;
+  gameState.roundEnded = true;
+  gameState.roundStarted = false;
+  showElements(nextRoundBtn);
+  console.log(gameState);
 }
 
 function startGame() {
@@ -184,8 +248,12 @@ function startGame() {
     return;
   }
 
-  addContentToElement("CHOOSE YOUR WEAPON!", choiceHeader);
+  addContentToElement(
+    `CHOOSE YOUR WEAPON FOR ROUND ${gameState.gameRound + 1}`,
+    choiceHeader
+  );
   hideElements(startGameBtn);
   showElements(quitRoundBtn, quitGameBtn);
+  gameState.allowedToStartNextRound = true;
   console.log(gameState);
 }

@@ -124,3 +124,9 @@ body {
 .hidden {
     display: none;
 }
+
+.rules-notifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
