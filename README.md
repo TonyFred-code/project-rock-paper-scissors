@@ -26,9 +26,9 @@ Project: Rock Paper Scissors (TOP)
     - Flexbox (extensively)
 
 ## Continued Development
-    - Hoping to one day learn more tricks and layout techniques to properly solve the challenge from frontend Mentor
+    - Learn more layout techniques to properly solve the challenge from frontend Mentor
     - Need to better reduce unnecessary functions and repeated code logic
 
 ## Acknowledgements
-    - Rock, Paper, Scissors (.svg)s from [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH)
+    - Rock, Paper, Scissors (.svg)s from [Challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH)
     - Project from [THE ODIN PROJECT](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors)
