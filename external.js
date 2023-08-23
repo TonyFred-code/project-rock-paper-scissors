@@ -17,6 +17,8 @@ choices.forEach((choice) => {
 
 startGameBtn.addEventListener("click", startGame);
 nextRoundBtn.addEventListener("click", startNextRound);
+quitGameBtn.addEventListener("click", resetGame);
+// quitRoundBtn.addEventListener("click", endRound);
 
 const gameState = {
   gameStarted: false,
@@ -83,12 +85,12 @@ function displayGameWinner() {
     addContentToElement("YOU LOSE THIS GAME!", gameSummaryText);
   }
 
-  setTimeout(() => {
-    hideElements(playerChoiceText, computerChoiceText, decisionSummary);
-  }, 400);
-  addContentToElement("START NEW GAME");
+  // setTimeout(() => {
+  //   hideElements(playerChoiceText, computerChoiceText, decisionSummary);
+  // }, 400);
+  addContentToElement("START NEW GAME", startGameBtn);
   showElements(gameSummaryText, startGameBtn);
-  hideElements(quitGameBtn, quitRoundBtn,nextRoundBtn);
+  hideElements(quitGameBtn, quitRoundBtn, nextRoundBtn);
 }
 
 function endGame() {
@@ -100,6 +102,11 @@ function displayScore() {
   addContentToElement(gameState.playerScore, playerScoreContainer);
   addContentToElement(gameState.computerScore, computerScoreContainer);
 }
+
+// function quitGame() {
+//   resetGame();
+
+// }
 
 function startNextRound() {
   hideElements(
@@ -229,24 +236,45 @@ function playRound() {
   displayRoundSummary(decisionSummary);
   gameState.gameRound++;
   addContentToElement(`ROUND ${gameState.gameRound} RESULTS`, choiceHeader);
-  updateScore();
-  displayScore();
   setTimeout(endRound, 150);
 }
 
-function quitGame() {}
+function resetGame() {
+  gameState.playerScore = 0;
+  gameState.computerScore = 0;
+  gameState.allowedToStartNextRound = false;
+  gameState.roundStarted = false;
+  gameState.playerChoice = null;
+  gameState.computerChoice = null;
+  gameState.roundWinner = null;
+  gameState.roundEnded = false;
+  gameState.roundStarted = false;
+  gameState.gameStarted = false;
+  gameState.gameEnded = false;
+  gameState.gameRound = 0;
+  hideElements(quitGameBtn, quitRoundBtn,nextRoundBtn, computerChoiceText, playerChoiceText, gameSummaryText, decisionSummary);
+  showElements(startGameBtn);
+  addContentToElement("WANNA PLAY?", choiceHeader);
+  updateScore();
+  displayScore();
+}
 
 function endRound() {
+  showElements(nextRoundBtn);
+  updateScore();
+  displayScore();
   gameState.playerChoice = null;
   gameState.computerChoice = null;
   gameState.roundWinner = null;
   gameState.roundEnded = true;
   gameState.roundStarted = false;
-  showElements(nextRoundBtn);
   console.log(gameState);
 }
 
 function startGame() {
+  if (gameState.gameEnded) {
+    resetGame();
+  }
   if (!gameState.gameStarted) {
     gameState.gameStarted = true;
   } else {
