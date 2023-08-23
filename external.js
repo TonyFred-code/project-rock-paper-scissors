@@ -55,25 +55,23 @@ function hideElements(...elements) {
 }
 
 function updateScore() {
-  if (gameState.playerScore === 5) {
-    gameState.gameWinner = "player";
-    displayGameWinner();
-    endRound();
-    endGame();
-    return;
-  } else if (gameState.computerScore === 5) {
-    gameState.gameWinner = "computer";
-    displayGameWinner();
-    endRound();
-    endGame();
-    return;
-  }
 
   if (gameState.roundWinner === "player") {
     gameState.playerScore++;
   } else if (gameState.roundWinner === "computer") {
     gameState.computerScore++;
   } else {
+    return;
+  }
+
+  if (gameState.playerScore === 5 || gameState.computerScore === 5) {
+    if(gameState.playerScore === 5) {
+      gameState.gameWinner = "player";
+    } else if (gameState.computerScore === 5) {
+      gameState.gameWinner = "computer";
+    }
+    endGame();
+    displayGameWinner();
     return;
   }
 }
@@ -84,6 +82,13 @@ function displayGameWinner() {
   } else if (gameState.gameWinner === "computer") {
     addContentToElement("YOU LOSE THIS GAME!", gameSummaryText);
   }
+
+  setTimeout(() => {
+    hideElements(playerChoiceText, computerChoiceText, decisionSummary);
+  }, 400);
+  addContentToElement("START NEW GAME");
+  showElements(gameSummaryText, startGameBtn);
+  hideElements(quitGameBtn, quitRoundBtn,nextRoundBtn);
 }
 
 function endGame() {
@@ -226,7 +231,7 @@ function playRound() {
   addContentToElement(`ROUND ${gameState.gameRound} RESULTS`, choiceHeader);
   updateScore();
   displayScore();
-  setTimeout(endRound, 2000);
+  setTimeout(endRound, 150);
 }
 
 function quitGame() {}

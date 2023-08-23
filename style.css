@@ -77,7 +77,12 @@ body {
     padding: 12px;
     outline: none;
     cursor: pointer;
+    user-select: none;
 }
+.choices img{
+    user-select: none;
+    -webkit-user-drag: none;
+ }
 
 .chosen {
     transform: scale(1.2);
