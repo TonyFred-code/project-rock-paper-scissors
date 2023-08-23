@@ -3,33 +3,32 @@ Project: Rock Paper Scissors (TOP)
 
 ## Task:
     - Make a simple Implementation of the hand-game - "Rock Paper Scissors"
+    - Add a UI for user to play the game
+    - Declare winner when a user score (or computer) reaches 5 points
+    - Add ability to end game
 
-## First Algorithm
-    - Get computer choice
-        - "Rock" or "Paper" or "Scissors"
-    - Get player choice
-        - Use prompts and make choice case-insensitive
-    - Use player's and computer choices to play round
-    - Inform user of winner of the round
-    - Make game run through 5 rounds to determine winner
-    - Inform user of winner of game after every 5 rounds
-    - Give option to restart playing game
 
-## Second Algorithm
-    - Get computer choice
-        - "Rock" or "Paper" or "Scissors"
-    - Get player choice
-        - Use prompts and make choice case-insensitive
-        - Create guards against edge cases
-            - When user cancels prompts
-                - Ask user whether to wish to remake a choice or lose round or forfeit game.
-            - If user uses wrong word
-                - Create a way to show user valid options
-                - Prompt user about remaking a valid choice
-    - Use player's and computer choices to play round
-    - Inform user of winner of the round
-    - Make game run through 5 rounds to determine winner
-    - Inform user of winner of game after every 5 rounds
-    - Give option to restart playing game
+## Screenshot
+![](./images/screenshot-1-rock-paper-scissors.png)
+    Here's an onload page of the game.
 
-- Game plays with 5 rounds no UI. Details in console.
+## Links
+- Solution URL: [View Code](https://github.com/TonyFred-code/project-rock-paper-scissors)
+- Live Site URL: [Live Preview](https://tonyfred-code.github.io/project-rock-paper-scissors/)
+
+## My process
+    - Started with no UI as first project iteration required
+    - Gave a UI and refactored working logic over a period of 4 days
+    - Have a couple of tinks to get around but its getting there
+    - Used flexbox heavily for the UI layout (learnt more than i expected)
+
+### Built with
+    - Flexbox (extensively)
+
+## Continued Development
+    - Hoping to one day learn more tricks and layout techniques to properly solve the challenge from frontend Mentor
+    - Need to better reduce unnecessary functions and repeated code logic
+
+## Acknowledgements
+    - Rock, Paper, Scissors (.svg)s from [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH)
+    - Project from [THE ODIN PROJECT](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors)
